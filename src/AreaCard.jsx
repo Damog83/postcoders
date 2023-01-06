@@ -1,5 +1,6 @@
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
+import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
@@ -14,6 +15,12 @@ export default function AreaCard({ area }) {
 				avatar={<Avatar sx={{ bgcolor: blue[500] }}  >{`${area['state abbreviation']}`}</Avatar>}
 				title={`${area['place name']}`}
 			/>
+			  <CardMedia
+        component="img"
+        height="100"
+        image="/src/post.jpg"
+        alt="Image of an envelope with the gps icon lay over the top"
+      />
 			<CardContent>
 				<Typography variant="body2" color="text.secondary">
 					Latitude: {`${area.latitude}`}
