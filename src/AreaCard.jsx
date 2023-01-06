@@ -4,13 +4,14 @@ import CardContent from '@mui/material/CardContent';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import { Box } from '@mui/system';
+import blue from '@mui/material/colors/blue';
 
 export default function AreaCard({ area }) {
 	return (
 		<Box m={2}>
 		<Card sx={{ maxWidth: 345 }}>
 			<CardHeader
-				avatar={<Avatar>{`${area['state abbreviation']}`}</Avatar>}
+				avatar={<Avatar sx={{ bgcolor: blue[500] }}  >{`${area['state abbreviation']}`}</Avatar>}
 				title={`${area['place name']}`}
 			/>
 			<CardContent>
