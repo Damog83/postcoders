@@ -41,7 +41,7 @@ function App() {
 			<h1>Postcoders</h1>
 			<h2>{`Areas for ${outcode}: ${areas.length}`}</h2>
 			<div>
-				<label htmlFor="fname">Enter outcode:</label>
+				<label htmlFor="pcode">Enter outcode:</label>
 				<input type="text" id="pcode" onChange={updateInput} />
 				<button onClick={changeOutcode}>Search</button>
 			</div>

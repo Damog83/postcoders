@@ -3,9 +3,11 @@ import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
+import { Box } from '@mui/system';
 
 export default function AreaCard({ area }) {
 	return (
+		<Box m={2}>
 		<Card sx={{ maxWidth: 345 }}>
 			<CardHeader
 				avatar={<Avatar>{`${area['state abbreviation']}`}</Avatar>}
@@ -23,5 +25,6 @@ export default function AreaCard({ area }) {
 				</Typography>
 			</CardContent>
 		</Card>
+		</Box>
 	);
 }
