@@ -1,34 +1,63 @@
-import { useEffect, useState } from 'react'
-import { getAreaData } from './api'
-
-import './App.css'
+import { useEffect, useState, useRef } from 'react';
+import { getAreaData } from './api';
+import './App.css';
+import AreaCard from './AreaCard';
 
 function App() {
+	const [areas, setAreas] = useState([]);
+	const [userInput, setUserInput] = useState('');
+	const [outcode, setOutcode] = useState('BB10');
+	const cache = useRef({});
 
-  const [areas, setAreas] = useState([]);
+	const load = async () => {
+		try {
+			if (cache.current[outcode]) {
+				const cachedOutcode = cache.current[outcode];
+				setAreas(cachedOutcode);
+			} else {
+				const areaData = await getAreaData(outcode);
+				cache.current[outcode] = areaData;
+				setAreas(areaData);
+			}
+		} catch (error) {
+			window.alert('todo: fix app');
+		}
+	};
 
-  const load = async () => {
-    try {
-      const areaData = await getAreaData()
+	useEffect(() => {
+		load();
+	}, [outcode]);
 
-      areas.concat(areaData);
-  
-      setAreas(areas);
-    } catch (error) {
-      window.alert("todo: fix app")
-    }
-  }
+	const updateInput = (e) => {
+		setUserInput(e.target.value);
+	};
 
-  useEffect(() => {
-    load();
-  }, []);
+	const changeOutcode = () => {
+		setOutcode(userInput);
+	};
 
-  return (
-    <div className="App">
-      <h1>Postcoders</h1>
-      <h2>{`Areas for BB10: ${areas.length}`}</h2>
-    </div>
-  )
+	return (
+		<div className="App">
+			<h1>Postcoders</h1>
+			<h2>{`Areas for ${outcode}: ${areas.length}`}</h2>
+			<div>
+				<label htmlFor="fname">Enter outcode:</label>
+				<input type="text" id="pcode" onChange={updateInput} />
+				<button onClick={changeOutcode}>Search</button>
+			</div>
+			<div id="areaList">
+				<ul>
+					{areas.map((area) => {
+						return (
+							<li key={`${area['place name']}`}>
+								<AreaCard area={area} />
+							</li>
+						);
+					})}
+				</ul>
+			</div>
+		</div>
+	);
 }
 
-export default App
+export default App;
