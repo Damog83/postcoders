@@ -20,7 +20,7 @@ function App() {
 				setAreas(areaData);
 			}
 		} catch (error) {
-			window.alert('todo: fix app');
+			window.alert(`${error.message}`);
 		}
 	};
 
@@ -32,6 +32,12 @@ function App() {
 		setUserInput(e.target.value);
 	};
 
+	const handleKeyDown = (e) => {
+		if(e.key === 'Enter') {
+			setOutcode(userInput)
+		}
+	}
+
 	const changeOutcode = () => {
 		setOutcode(userInput);
 	};
@@ -42,8 +48,15 @@ function App() {
 			<h2>{`Areas for ${outcode}: ${areas.length}`}</h2>
 			<div>
 				<label htmlFor="pcode">Enter outcode:</label>
-				<input type="text" id="pcode" onChange={updateInput} />
-				<button onClick={changeOutcode}>Search</button>
+				<input
+					type="text"
+					id="pcode"
+					onChange={updateInput}
+					onKeyDown={handleKeyDown}
+				/>
+				<button disabled={!userInput} onClick={changeOutcode}>
+					Search
+				</button>
 			</div>
 			<div id="areaList">
 				<ul>

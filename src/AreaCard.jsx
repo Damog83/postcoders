@@ -12,7 +12,7 @@ import { blue } from '@mui/material/colors';
 export default function AreaCard({ area }) {
 	return (
 		<Box m={2}>
-			<Card sx={{ maxWidth: 345 }}>
+			<Card elevation={10} sx={{ minWidth: 200 }}>
 				<CardHeader
 					avatar={
 						<Avatar
